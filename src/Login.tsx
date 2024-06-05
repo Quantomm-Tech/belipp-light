@@ -127,23 +127,25 @@ const Login: React.FC = () => {
         </Box>
       )}
       {stage === "NEW_PASSWORD_REQUIRED" && (
-        <form onSubmit={handleNewPasswordSubmit}>
-          <Box mb={1}>
-            <TextField
-              fullWidth
-              type="password"
-              placeholder="New Password"
-              value={newPassword}
-              onChange={(e) => setNewPassword(e.target.value)}
-            ></TextField>
-          </Box>
+        <Box className={classes.login__container}>
+          <form onSubmit={handleNewPasswordSubmit}>
+            <Box mb={1}>
+              <TextField
+                fullWidth
+                type="password"
+                placeholder="New Password"
+                value={newPassword}
+                onChange={(e) => setNewPassword(e.target.value)}
+              ></TextField>
+            </Box>
 
-          <Box mt={2} mb={1} className={classes.login__actions}>
-            <Button type="submit" variant="contained" fullWidth>
-              Cambiar contraseña
-            </Button>
-          </Box>
-        </form>
+            <Box mt={2} mb={1} className={classes.login__actions}>
+              <Button type="submit" variant="contained" fullWidth>
+                Cambiar contraseña
+              </Button>
+            </Box>
+          </form>
+        </Box>
       )}
     </>
   );
