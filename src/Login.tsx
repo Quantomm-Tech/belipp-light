@@ -37,9 +37,7 @@ const Login: React.FC = () => {
         user.authenticateUser(authenticationDetails, {
           onSuccess: () => resolve(),
           onFailure: (err) => reject(err),
-          newPasswordRequired: (userAttributes, requiredAttributes) => {
-            debugger;
-
+          newPasswordRequired: (userAttributes) => {
             setCognitoUser(user); // Guarda la instancia del usuario
 
             // Elimina los atributos que no se pueden actualizar
