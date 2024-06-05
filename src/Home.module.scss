@@ -1,0 +1,17 @@
+.home {
+  margin-top: 10%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  .home__card {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 300px;
+    padding: 10px 10px 20px 10px;
+    border: 1.3px solid #355d78;
+    border-radius: 10px;
+    cursor: pointer;
+  }
+}

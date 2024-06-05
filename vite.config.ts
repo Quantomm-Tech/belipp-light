@@ -8,7 +8,7 @@ export default defineConfig({
     global: {},
   },
   server: {
-    port: 4000,
+    port: 4100,
   },
   resolve: {
     alias: {

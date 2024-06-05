@@ -1,9 +1,13 @@
+// src/Login.tsx
 import React, { useState } from "react";
 import {
   CognitoUserPool,
   AuthenticationDetails,
   CognitoUser,
 } from "amazon-cognito-identity-js";
+import { Box, Button, TextField } from "@mui/material";
+import classes from "./Login.module.scss";
+import { useAuth } from "./AuthContext";
 
 const config = {
   region: "us-east-1",
@@ -20,6 +24,8 @@ const Login: React.FC = () => {
   );
   const [cognitoUser, setCognitoUser] = useState<CognitoUser | null>(null);
 
+  const { signIn } = useAuth();
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const userPool = new CognitoUserPool({
@@ -35,22 +41,20 @@ const Login: React.FC = () => {
     try {
       await new Promise<void>((resolve, reject) => {
         user.authenticateUser(authenticationDetails, {
-          onSuccess: () => resolve(),
+          onSuccess: (session) => {
+            console.log("Login successful", session);
+            signIn(user); // Llama a signIn del AuthContext
+            resolve();
+          },
           onFailure: (err) => reject(err),
           newPasswordRequired: (userAttributes) => {
             setCognitoUser(user); // Guarda la instancia del usuario
-
-            // Elimina los atributos que no se pueden actualizar
             delete userAttributes.email_verified;
             setStage("NEW_PASSWORD_REQUIRED");
             resolve();
           },
         });
       });
-      if (stage === "LOGIN") {
-        console.log("Login successful");
-        // Redireccionar o realizar otras acciones después del login exitoso
-      }
     } catch (error) {
       console.error("Login error:", error);
     }
@@ -71,13 +75,15 @@ const Login: React.FC = () => {
           newPassword,
           {},
           {
-            onSuccess: () => resolve(),
+            onSuccess: (session) => {
+              console.log("Password updated successfully", session);
+              signIn(cognitoUser); // Llama a signIn del AuthContext
+              resolve();
+            },
             onFailure: (err) => reject(err),
           }
         );
       });
-      console.log("Password updated successfully");
-      // Redireccionar o realizar otras acciones después del cambio de contraseña exitoso
     } catch (error) {
       console.error("Error updating password:", error);
     }
@@ -86,31 +92,57 @@ const Login: React.FC = () => {
   return (
     <>
       {stage === "LOGIN" && (
-        <form onSubmit={handleSubmit}>
-          <input
-            type=""
-            placeholder="Email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-          <input
-            type="password"
-            placeholder="Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-          <button type="submit">Login</button>
-        </form>
+        <Box className={classes.login__container}>
+          <Box mt={1} mb={2}>
+            <img
+              src="https://d3n7cyfdcp067b.cloudfront.net/belipp/bel-logo__belipp.png"
+              alt="Belipp"
+            />
+          </Box>
+
+          <form className={classes.login__form} onSubmit={handleSubmit}>
+            <Box mb={1}>
+              <TextField
+                fullWidth
+                placeholder="Usuario"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              ></TextField>
+            </Box>
+            <Box mb={1}>
+              <TextField
+                fullWidth
+                type="password"
+                placeholder="*****"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              ></TextField>
+            </Box>
+            <Box mt={2} mb={1} className={classes.login__actions}>
+              <Button type="submit" variant="contained" fullWidth>
+                Iniciar sesión
+              </Button>
+            </Box>
+          </form>
+        </Box>
       )}
       {stage === "NEW_PASSWORD_REQUIRED" && (
         <form onSubmit={handleNewPasswordSubmit}>
-          <input
-            type="password"
-            placeholder="New Password"
-            value={newPassword}
-            onChange={(e) => setNewPassword(e.target.value)}
-          />
-          <button type="submit">Set New Password</button>
+          <Box mb={1}>
+            <TextField
+              fullWidth
+              type="password"
+              placeholder="New Password"
+              value={newPassword}
+              onChange={(e) => setNewPassword(e.target.value)}
+            ></TextField>
+          </Box>
+
+          <Box mt={2} mb={1} className={classes.login__actions}>
+            <Button type="submit" variant="contained" fullWidth>
+              Cambiar contraseña
+            </Button>
+          </Box>
         </form>
       )}
     </>
