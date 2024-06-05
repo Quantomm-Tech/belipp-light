@@ -14,8 +14,8 @@ const Login: React.FC = () => {
 
     const config = {
       region: "us-east-1",
-      userPoolId: "us-east-1_pUO2sK4Y2",
-      userPoolWebClientId: "d2axrrf5qqsyaw",
+      userPoolWebClientId: "us-east-1_pUO2sK4Y2",
+      userPoolId: "d2axrrf5qqsyaw",
     };
 
     const userPool = new CognitoUserPool({
