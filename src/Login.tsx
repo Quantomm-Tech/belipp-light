@@ -14,8 +14,8 @@ const Login: React.FC = () => {
 
     const config = {
       region: "us-east-1",
-      userPoolWebClientId: "us-east-1_pUO2sK4Y2",
-      userPoolId: "d2axrrf5qqsyaw",
+      userPoolId: "us-east-1_pUO2sK4Y2",
+      userPoolWebClientId: "d2axrrf5qqsyaw",
     };
 
     const userPool = new CognitoUserPool({
@@ -44,7 +44,6 @@ const Login: React.FC = () => {
   return (
     <form onSubmit={handleSubmit}>
       <input
-        type="email"
         placeholder="Email"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
