@@ -1,0 +1,45 @@
+@import "../../../assets/_scss/variables.scss";
+@import "../../../assets/_scss/fontsMobile.scss";
+@import "../../../assets/_scss/buttons.scss";
+@import "../../../assets/_scss/mixins.scss";
+
+.MuiTableContainer-root.custom-table {
+  border: 1px solid #ebf6ff;
+
+  .MuiTableHead-root {
+    * {
+      color: #ffffff !important;
+      font-family: $strawfordbold;
+      font-weight: 700;
+      font-size: 16px;
+      line-height: 25px;
+    }
+    .MuiTableCell-root {
+      .MuiButtonBase-root {
+        flex-direction: row-reverse;
+        text-align: left;
+      }
+    }
+  }
+
+  .MuiTableBody-root {
+    * {
+      color: #192c38;
+      font-size: 16px;
+      line-height: 20px;
+    }
+  }
+
+  .MuiTableRow-root.MuiTableRow-hover:hover {
+    background: #ebf6ff;
+    cursor: pointer;
+    .MuiTableCell-root:first-child {
+      border-left: 4px solid #355d78;
+    }
+  }
+
+  .row__flex {
+    display: flex;
+    flex-direction: column;
+  }
+}

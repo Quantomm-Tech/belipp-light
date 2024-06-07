@@ -11,4 +11,10 @@ export class CreditAplicationService {
   getCreditApplications() {
     return http.get(`${this.baseUrl}/creditPayroll/admon-allcreditrequests`);
   }
+
+  getCreditApplicationDetail(requestId: string) {
+    return http.get(
+      `${this.baseUrl}/creditPayroll/admon-creditinformation?requestId=${requestId}`
+    );
+  }
 }

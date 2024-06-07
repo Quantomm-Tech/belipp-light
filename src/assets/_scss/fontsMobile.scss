@@ -1,0 +1,351 @@
+@import './variables.scss';
+
+@mixin body__large--medium {
+    font-family: $mobile__font;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 22px;
+    letter-spacing: initial;
+}
+@mixin body__large--bold {
+    font-family: $mobile__font;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 19px;
+    line-height: 26px;
+    letter-spacing: initial;
+}
+
+@mixin body__regular--small {
+    font-family: $mobile__font;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 16px;
+}
+
+@mixin body__regular {
+    font-family: $mobile__font;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 13px;
+    line-height: 17px;
+}
+@mixin body__regular--one {
+    font-family: $mobile__font;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 17px;
+    line-height: 24px;
+}
+
+@mixin body__regular--two {
+    font-family: $mobile__font;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 22px;
+    letter-spacing: initial;
+}
+
+@mixin body__regular--three {
+    font-family: $mobile__font;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 22px;
+    letter-spacing: initial;
+}
+
+@mixin body__regular--four {
+    font-family: $mobile__font;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 21px;
+    letter-spacing: initial;
+}
+
+@mixin body__bold--one {
+    font-family: $mobile__font;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 13px;
+    line-height: 17px;
+    letter-spacing: initial;
+}
+
+@mixin body__bold--two {
+    font-family: $mobile__font;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 23px;
+    letter-spacing: initial;
+}
+
+@mixin body__bold--three {
+    font-family: $mobile__font;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 25px;
+    letter-spacing: initial;
+}
+
+@mixin body__bold--four {
+    font-family: $mobile__font;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 19px;
+    letter-spacing: initial;
+}
+
+@mixin body__bold--five {
+    font-family: $mobile__font;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 11px;
+    line-height: 22px;
+    letter-spacing: initial;
+}
+
+@mixin big__bold {
+    font-family: $mobile__font;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 25px;
+    line-height: 25px;
+}
+
+@mixin body__medium--normal {
+    font-family: $mobile__font;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 25px;
+}
+
+@mixin body__medium--bold {
+    font-family: $mobile__font;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 18px;
+    line-height: 25px;
+}
+
+@mixin body__medium--one {
+    font-family: $mobile__font;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 17px;
+    line-height: 24px;
+}
+
+@mixin body__medium--two {
+    font-family: $mobile__font;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 22px;
+}
+
+@mixin body__medium__bold--one {
+    font-family: $mobile__font;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 17px;
+    line-height: 25px;
+}
+
+@mixin body__medium--three {
+    font-family: $mobile__font;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 15px;
+    line-height: 22px;
+}
+
+@mixin body__medium__bold--three {
+    font-family: $mobile__font;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 15px;
+    line-height: 22px;
+}
+
+@mixin body__medium__bold--two {
+    font-family: $mobile__font;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 22px;
+}
+
+@mixin body__normal__bold--two {
+    font-family: $mobile__font;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 22px;
+}
+
+@mixin body__regular--uppercase {
+    font-family: $mobile__font;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 11px;
+    line-height: 20px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+}
+
+@mixin body__normal__bold--one {
+    font-family: $mobile__font;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 17px;
+    line-height: 25px;
+}
+
+@mixin modal__title--bold {
+    font-family: $mobile__font;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 21px;
+    line-height: 29px;
+}
+
+@mixin modal__title__big--bold {
+    font-family: $mobile__font;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 26px;
+    line-height: 38px;
+}
+
+@mixin body__bold--three {
+    font-family: $mobile__font;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 15px;
+    line-height: 22px;
+    letter-spacing: initial;
+}
+
+@mixin font__helpertext {
+    font-family: $mobile__font;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 10px;
+    line-height: 16px;
+    letter-spacing: initial;
+}
+@mixin headline__normal {
+    font-family: $mobile__font;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 22px;
+    line-height: 48px;
+}
+@mixin headline__bold {
+    font-family: $mobile__font;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 23px;
+    line-height: 48px;
+}
+
+@mixin back__link {
+    font-family: $mobile__font;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 24px;
+}
+
+/*Desktop fonts mixins*/
+
+@mixin desktop__headline__normal {
+    font-family: $mobile__font;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 50px;
+    line-height: 60px;
+}
+
+@mixin desktop__headline__normal__two {
+    font-family: $mobile__font;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 26px;
+    line-height: 31px;
+}
+
+@mixin desktop__headline__bold {
+    font-family: $mobile__font;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 50px;
+    line-height: 60px;
+}
+
+@mixin desktop__headline__bold__two {
+    font-family: $mobile__font;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 26px;
+    line-height: 35px;
+}
+
+@mixin desktop__big__bold {
+    font-family: $mobile__font;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 48px;
+    line-height: 25px;
+}
+
+@mixin desktop__body__regular--uppercase {
+    font-family: $mobile__font;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 13px;
+    line-height: 20px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+}
+
+@mixin desktop__modal__title__bold {
+    font-family: $mobile__font;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 28px;
+    line-height: 36px;
+}
+
+@mixin desktop__body__authorization {
+    font-family: $mobile__font;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 30px;
+}
+
+@mixin desktop__body__authorization__title {
+    font-family: $mobile__font;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 28px;
+    line-height: 36px;
+}
+
+@mixin desktop__section__title {
+    font-family: $mobile__font;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 20px;
+}

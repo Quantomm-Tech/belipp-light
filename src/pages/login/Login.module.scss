@@ -1,0 +1,35 @@
+@import "../../assets/_scss/variables.scss";
+
+.login__container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 100vh;
+  background: rgb(108, 191, 248);
+  background: linear-gradient(
+    180deg,
+    rgba(108, 191, 248, 0.1772059165) 0%,
+    rgba(108, 191, 248, 0.1772059165) 10%,
+    rgba(255, 255, 255, 0) 99%
+  );
+
+  .login__form {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    width: 400px;
+    background: $backgroundMain;
+    padding: 40px;
+    border-radius: 8px;
+    > div {
+      width: 100%;
+    }
+    .login__actions {
+      text-align: center;
+      button {
+        height: 40px;
+      }
+    }
+  }
+}

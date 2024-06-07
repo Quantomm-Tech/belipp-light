@@ -10,8 +10,12 @@
     flex-direction: column;
     width: 300px;
     padding: 10px 10px 20px 10px;
-    border: 1.3px solid #355d78;
-    border-radius: 10px;
+    // border: 1.3px solid #355d78;
+    border-radius: 8px;
     cursor: pointer;
+    background: #ebf6ff;
+    box-shadow: 0 0 4px #26006973;
+    box-shadow: 0 2px 4px -2px #2600690f;
+    box-shadow: 0 4px 8px -2px #2600691a;
   }
 }

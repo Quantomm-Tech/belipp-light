@@ -1,0 +1,42 @@
+[
+    {
+        "key": "withholdingAgent",
+        "description": "Agente retenodor",
+        "content": "<div class='tooltip__regular--text'><em>El agente retenedor</em> es la persona encargada de hacer la retención en la fuente, y está en la obligación de recaudar y consignar los dineros materia del tributo.</div>"
+    },
+    {
+        "key": "activeCredits",
+        "description": "Creditos activos",
+        "content": "<div class='tooltip__regular--text'>Son los <em>créditos activos</em> que tienes vinculados con el sector financiero, cooperativo, real y telecomunicaciones</div>"
+    },
+    {
+        "key": "lastRequests",
+        "description": "Ultimas consultas",
+        "content": "<div class='tooltip__regular--text'>Son las <em>consultas realizadas a datacrédito</em> por el sector financiero, cooperativo, real y telecomunicaciones</div>"
+    },
+    {
+        "key": "restructureCredits",
+        "description": "Creditos restructurados",
+        "content": "<div class='tooltip__regular--text'>Son los créditos o préstamos que presentaron cambios en las condiciones <em>inicialmente pactadas como plazo, tasa de interés</em>, entre otros para que puedas cumplir con el pago de las cuotas de una forma favorable para ti.</div>"
+    },
+    {
+        "key": "totalDebt",
+        "description": "Total de deuda",
+        "content": "<div class='tooltip__regular--text'>Es el <em>saldo total</em> que debes por los créditos o préstamos utilizados</div>"
+    },
+    {
+        "key": "debtCapacity",
+        "description": "Capacidad de endeudamiento",
+        "content": "<div class='tooltip__regular--text'>Es la cantidad o monto máximo por el cual <em>te puedes endeudar</em> sin poner en riesgo tu solvencia económica </div>"
+    },
+    {
+        "key": "contract",
+        "description": "Contrato mutuo",
+        "content": "<div class='tooltip__regular--text'>En este paso podrás <em>visualizar y confirmar las condiciones pactadas</em> y aprobadas de tu crédito o préstamo.</div>"
+    },
+    {
+        "key": "promissoryNote",
+        "description": "Firma pagare",
+        "content": "<div class='tooltip__regular--text'>En este paso podrás <em>firmar el pagaré de tu préstamo</em>, una vez se encuentre firmado realizaremos el desembolso.</div>"
+    }
+]

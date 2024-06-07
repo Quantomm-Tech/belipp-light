@@ -1,0 +1,15 @@
+@import './variables.scss';
+
+:export {
+    primary: $primaryApprobe;
+    secondary: $secondaryApprobe;
+    success: $successApprobe;
+    error: $errorApprobe;
+    link: $linkApprobe;
+    small: $smallApprobe;
+    xs: $xsApprobe;
+    medium: $mediumApprobe;
+    large: $largeApprobe;
+    extraLarge: $extraLargeApprobe;
+    containerHeight: $containerHeightApprobe;
+}
