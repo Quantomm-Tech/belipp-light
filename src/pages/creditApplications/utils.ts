@@ -1,4 +1,5 @@
-import { formatDate, getMil } from "../../utils/utils";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { getMil } from "../../utils/utils";
 
 export const headers = [
   {
@@ -47,7 +48,15 @@ export const headers = [
   },
 ];
 
-export const rows = (args) => {
+export const rows = (args: {
+  requestsId: any;
+  debtorNames: any;
+  ammountRequested: any;
+  documentNumber: any;
+  requestedDate: any;
+  requestStatus: any;
+  creditType: any;
+}) => {
   const {
     requestsId,
     debtorNames,
@@ -68,29 +77,39 @@ export const rows = (args) => {
   };
 };
 
-export const getCells = (data) => {
-  let cells = [];
+export const getCells = (data: any[]) => {
+  let cells: any[] = [];
 
-  data.forEach((element) => {
-    cells = [
-      ...cells,
-      rows({
-        requestsId: element.requestsId,
-        debtorNames: `<em>${element.debtorNames}</em>`,
-        ammountRequested: getMil(element.ammountRequested),
-        documentNumber: element.documentNumber,
-        requestedDate: `${element.requestedDate.split(" ")[0]}`,
-        requestStatus: element.requestStatus,
-        creditType: `<div class='column__status ${getClassColorCreditDestination(
-          element.creditType
-        )}'>${element.creditType}</div>`,
-      }),
-    ];
-  });
+  data.forEach(
+    (element: {
+      requestsId: any;
+      debtorNames: any;
+      ammountRequested: any;
+      documentNumber: any;
+      requestedDate: string;
+      requestStatus: any;
+      creditType: string;
+    }) => {
+      cells = [
+        ...cells,
+        rows({
+          requestsId: element.requestsId,
+          debtorNames: `<em>${element.debtorNames}</em>`,
+          ammountRequested: getMil(element.ammountRequested),
+          documentNumber: element.documentNumber,
+          requestedDate: `${element.requestedDate.split(" ")[0]}`,
+          requestStatus: element.requestStatus,
+          creditType: `<div class='column__status ${getClassColorCreditDestination(
+            element.creditType
+          )}'>${element.creditType}</div>`,
+        }),
+      ];
+    }
+  );
   return cells;
 };
 
-export const getClassColorCreditDestination = (status) => {
+export const getClassColorCreditDestination = (status: string) => {
   let className = "status__grey";
   if (status) {
     const colorCreditDestinations = [
@@ -117,6 +136,7 @@ export const getClassColorCreditDestination = (status) => {
     ];
 
     const classColor = colorCreditDestinations.filter((item) => {
+      //@ts-ignore
       if (item.creditDestinationId === status || item.description === status) {
         return item.color;
       }

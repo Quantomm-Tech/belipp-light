@@ -15,7 +15,6 @@ import {
 
 import "./css/Table.scss";
 import Paginator from "./Paginator";
-import { getMil } from "../../utils/utils";
 
 const StyledTableCell = styled(TableCell)(() => ({
   [`&.${tableCellClasses.head}`]: {
@@ -148,6 +147,7 @@ export default function NewTable(props: {
                 }) => (
                   <StyledTableCell
                     key={column.id}
+                    //@ts-ignore
                     align={column.align}
                     style={{ minWidth: column.minWidth }}
                     sortDirection={orderBy === column.sortcol ? order : false}
@@ -188,6 +188,7 @@ export default function NewTable(props: {
                         align: string | undefined;
                         onClick: any;
                       }) => {
+                        //@ts-ignore
                         const value = item[column.id];
 
                         return (
@@ -216,6 +217,7 @@ export default function NewTable(props: {
           </TableBody>
         </Table>
       </TableContainer>
+
       {items.length > 0 && showPaginator && (
         <Paginator
           totalRows={totalRows}

@@ -11,32 +11,15 @@ import "./CreditApplications.scss";
 import NewTable from "../../UI/table/NewTable";
 import { CreditAplicationService } from "../../api/creditApplication";
 import { useNavigate } from "react-router-dom";
-
-interface CreditApplication {
-  id: string;
-  destinoCredito: string;
-  nombreSolicitante: string;
-  numeroDocumento: string;
-  numeroSolicitud: string;
-  valorSolicitado: number;
-  fechaSolicitud: string;
-  estado: string;
-}
+import Loading from "../../UI/loading/Loading";
 
 const CreditApplications: React.FC = () => {
-  const [applications, setApplications] = useState<CreditApplication[]>([]);
   const [loading, setLoading] = useState(true);
 
-  const [currentRowPage, setCurrentRowPage] = useState(5);
-  const [currentPage, setCurrentPage] = useState(0);
   const [totalRows, setTotalRows] = useState(0);
-  const [params, setParams] = useState({
-    pagenum: currentPage + 1,
-    rowpag: currentRowPage,
-  });
+
   const [tableData, setTableData] = useState([]);
-  const [order, setOrder] = useState("asc");
-  const [orderBy, setOrderBy] = useState("");
+
   const [resetTablePagination, setResetTablePagination] = useState(false);
   const navigate = useNavigate();
 
@@ -56,6 +39,7 @@ const CreditApplications: React.FC = () => {
 
         if (response.data.isSuccess) {
           const dataFormated = getCells(response.data.data);
+          //@ts-ignore
           setTableData(dataFormated);
 
           setTotalRows(response.data.data.length);
@@ -72,41 +56,48 @@ const CreditApplications: React.FC = () => {
   }, []);
 
   return (
-    <Box className={`${classes.credit__applications} legalization__base`}>
-      <Typography variant="h1">Solicitudes pendientes de desembolso</Typography>
-      <Divider className="divider" />
-      <Box style={{ marginTop: 20 }}>
-        <NewTable
-          columns={headers}
-          rows={tableData}
-          order={order}
-          orderBy={orderBy}
-          resetTablePagination={resetTablePagination}
-          currentPage={currentPage}
-          totalRows={totalRows}
-          currentRowPage={currentRowPage}
-          onNextPage={(_pageToSwitch: any, _onTableSetPage: any) => {
-            console.log("Next page");
-          }}
-          onRowsPerPage={(
-            _onTableSetPage: any,
-            _onRowsPerPage: any,
-            _rowsPerPage: any
-          ) => {
-            console.log("onRowsPerPage");
-          }}
-          onResetTablePagination={setResetTablePagination}
-          onRequestSort={(_event: any, _property: any) => {
-            console.log("onRequestSort");
-          }}
-          onRowClick={(_row: any) => {
-            console.log("onRowClick");
-            handleRockClick(_row);
-          }}
-          showPaginator={false}
-        />
-      </Box>
-    </Box>
+    <>
+      {loading ? (
+        <Loading />
+      ) : (
+        <Box className={`${classes.credit__applications} legalization__base`}>
+          <Typography variant="h2">
+            Solicitudes pendientes de desembolso
+          </Typography>
+          <Divider className="divider" />
+          <Box style={{ marginTop: 20 }}>
+            <NewTable
+              columns={headers}
+              rows={tableData}
+              order={""}
+              orderBy={"desc"}
+              resetTablePagination={resetTablePagination}
+              currentPage={0}
+              totalRows={totalRows}
+              currentRowPage={10}
+              onNextPage={(_pageToSwitch: any, _onTableSetPage: any) => {
+                console.log("Next page");
+              }}
+              onRowsPerPage={(
+                _onTableSetPage: any,
+                _onRowsPerPage: any,
+                _rowsPerPage: any
+              ) => {
+                console.log("onRowsPerPage");
+              }}
+              onResetTablePagination={setResetTablePagination}
+              onRequestSort={(_event: any, _property: any) => {
+                console.log("onRequestSort");
+              }}
+              onRowClick={(_row: any) => {
+                handleRockClick(_row);
+              }}
+              showPaginator={true}
+            />
+          </Box>
+        </Box>
+      )}
+    </>
   );
 };
 

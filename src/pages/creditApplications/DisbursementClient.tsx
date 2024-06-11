@@ -1,72 +1,76 @@
 import * as React from "react";
-import { Divider } from "@mui/material";
+import { Divider, Typography } from "@mui/material";
 import { getMil } from "../../utils/utils";
+import { MainInformation } from "./CreditApplicationDetail";
 
-const DisbursementClient = ({ disbursementClientData }) => {
-  disbursementClientData = {
-    ...disbursementClientData,
-    documentBeneficiary: disbursementClientData.documentNumber,
-    nameBeneficiary: `${disbursementClientData.names} ${disbursementClientData.surnames}`,
-    typeBeneficiaryLabel: "Tipo de cuenta: ",
-    typeBeneficiary: disbursementClientData.accountTypeName,
-  };
+interface DisbursementClientProps {
+  disbursementClientData: MainInformation;
+}
 
-  if (disbursementClientData.creditDestinationId === 10) {
-    disbursementClientData["documentBeneficiary"] =
-      disbursementClientData.entityNit;
-    disbursementClientData["nameBeneficiary"] =
-      disbursementClientData.entityName;
-    disbursementClientData["typeBeneficiaryLabel"] = "Tipo de crédito: ";
-    disbursementClientData["typeBeneficiary"] =
-      disbursementClientData.loanTypeName;
-  }
+const DisbursementClient: React.FC<DisbursementClientProps> = ({
+  disbursementClientData,
+}) => {
   return (
     <div className="disbursement__detail">
-      <h2>Datos ingresados por el cliente para desembolso</h2>
+      <Typography variant="h2" mb={1} color={"primary"}>
+        Datos ingresados por el cliente para desembolso
+      </Typography>
       <Divider />
       <section className="disbursement__detail__columns principal">
         <div className="row">
-          <p className="key">Destino del crédito:</p>
-          <p className="value">{disbursementClientData.creditDestination}</p>
-        </div>{" "}
+          <Typography variant="body1">Destino del crédito:</Typography>
+          <Typography variant="subtitle2">
+            {disbursementClientData.creditType}
+          </Typography>
+        </div>
         <div className="row">
-          <p className="key">Valor desembolso:</p>
-          <p className="value amount">
-            {getMil(disbursementClientData.disbursementValue)}
-          </p>
+          <Typography variant="body1">Valor desembolso:</Typography>
+          <Typography variant="h2">
+            {getMil(disbursementClientData.ammountRequested)}
+          </Typography>
         </div>
       </section>
       <section className="disbursement__detail__columns">
         <div className="column__one">
           <div className="row">
-            <p className="key">Nombre del beneficiario:</p>
-            <p className="value">{disbursementClientData.nameBeneficiary}</p>
+            <Typography variant="body1">Nombre del beneficiario:</Typography>
+            <Typography variant="subtitle2">
+              {disbursementClientData.contactNames}
+            </Typography>
           </div>
           <div className="row">
-            <p className="key">Documento:</p>
-            <p className="value">
-              {disbursementClientData.documentBeneficiary}
-            </p>
+            <Typography variant="body1">Documento:</Typography>
+            <Typography variant="subtitle2">
+              {disbursementClientData.documentNumber}
+            </Typography>
           </div>
           <div className="row">
-            <p className="key">Fecha legalizado:</p>
-            <p className="value">{disbursementClientData.legalizationDate} </p>
+            <Typography variant="body1">Fecha legalizado:</Typography>
+            <Typography variant="subtitle2">
+              {disbursementClientData.requestedDate}{" "}
+            </Typography>
           </div>
         </div>
         <div className="column__two">
           <div className="row">
-            <p className="key">Banco:</p>
-            <p className="value">{disbursementClientData.entityName}</p>
+            <Typography variant="body1">Banco:</Typography>
+            <Typography variant="subtitle2">
+              {disbursementClientData.banco}
+            </Typography>
           </div>
 
           <div className="row">
-            <p className="key">{disbursementClientData.typeBeneficiaryLabel}</p>
-            <p className="value">{disbursementClientData.typeBeneficiary}</p>
+            <Typography variant="body1">Tipo de cuenta: </Typography>
+            <Typography variant="subtitle2">
+              {disbursementClientData.accountType}
+            </Typography>
           </div>
 
           <div className="row">
-            <p className="key">Número de cuenta:</p>
-            <p className="value">{disbursementClientData.productNumber}</p>
+            <Typography variant="body1">Número de cuenta:</Typography>
+            <Typography variant="subtitle2">
+              {disbursementClientData.accountNumber}
+            </Typography>
           </div>
         </div>
       </section>

@@ -18,7 +18,7 @@ const Home: React.FC = () => {
           src="https://d3n7cyfdcp067b.cloudfront.net/ben-estado-solicitudes.png"
           alt="Listado de solicitudes"
         />
-        <Typography variant="h1">
+        <Typography variant="h2">
           Solicitudes pendientes de desembolso
         </Typography>
       </Box>

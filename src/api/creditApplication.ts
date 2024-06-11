@@ -17,4 +17,11 @@ export class CreditAplicationService {
       `${this.baseUrl}/creditPayroll/admon-creditinformation?requestId=${requestId}`
     );
   }
+
+  updateCreditApplication(body: any) {
+    return http.post(
+      `${this.baseUrl}/creditPayroll/admon-creditinformation/disbursement`,
+      body
+    );
+  }
 }

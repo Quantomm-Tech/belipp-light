@@ -1,10 +1,10 @@
-import moment from "moment";
-
-export const getMil = (value) => {
+export const getMil = (value: number | bigint | null | undefined) => {
   let valueFormated = "";
   if (value === null || value === undefined) {
+    //@ts-ignore
     valueFormated = 0;
   } else {
+    //@ts-ignore
     value = Math.round(value);
 
     valueFormated = new Intl.NumberFormat("es-CO", {
@@ -16,12 +16,6 @@ export const getMil = (value) => {
   }
   return valueFormated;
 };
-
-export const formatDate = (date, format) => {
-  return moment(date).format(format);
-};
-
-// src/utils/translateCognitoError.ts
 
 export const translateCognitoError = (errorMessage: string): string => {
   switch (errorMessage) {
