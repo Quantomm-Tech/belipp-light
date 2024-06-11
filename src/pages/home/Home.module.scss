@@ -1,8 +1,12 @@
+@import "../../assets/_scss/variables.scss";
+@import "../../assets/_scss/mixins.scss";
+
 .home {
-  margin-top: 10%;
   display: flex;
   align-items: center;
   justify-content: center;
+  @include background__gradient;
+  padding: 10%;
   .home__card {
     display: flex;
     align-items: center;
@@ -10,12 +14,12 @@
     flex-direction: column;
     width: 300px;
     padding: 10px 10px 20px 10px;
-    // border: 1.3px solid #355d78;
     border-radius: 8px;
     cursor: pointer;
-    background: #ebf6ff;
+    background: $backgroundMain;
     box-shadow: 0 0 4px #26006973;
     box-shadow: 0 2px 4px -2px #2600690f;
     box-shadow: 0 4px 8px -2px #2600691a;
+    text-align: center;
   }
 }

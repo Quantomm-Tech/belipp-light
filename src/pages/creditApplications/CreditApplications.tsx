@@ -2,7 +2,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useEffect, useState } from "react";
 
-import { Box, Divider } from "@mui/material";
+import { Box, Divider, Typography } from "@mui/material";
 
 import { getCells, headers } from "./utils";
 import classes from "./CreditApplications.module.scss";
@@ -73,9 +73,7 @@ const CreditApplications: React.FC = () => {
 
   return (
     <Box className={`${classes.credit__applications} legalization__base`}>
-      <h2 className="legalization__title">
-        Solicitudes pendientes de desembolso
-      </h2>
+      <Typography variant="h1">Solicitudes pendientes de desembolso</Typography>
       <Divider className="divider" />
       <Box style={{ marginTop: 20 }}>
         <NewTable

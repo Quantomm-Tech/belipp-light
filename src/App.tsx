@@ -5,12 +5,13 @@ import {
   Routes,
   Route,
   Outlet,
+  Navigate,
 } from "react-router-dom";
 import Login from "./pages/login/Login";
-import Home from "./Home";
+import Home from "./pages/home/Home";
 import ProtectedRoute from "./ProtectedRoute";
 
-import { AuthProvider } from "./AuthContext";
+import { AuthProvider, useAuth } from "./AuthContext";
 import CreditApplications from "./pages/creditApplications/CreditApplications";
 import Header from "./Header";
 import CreditApplicationDetail from "./pages/creditApplications/CreditApplicationDetail";
@@ -21,6 +22,7 @@ const App: React.FC = () => {
       <AuthProvider>
         <Routes>
           <Route path="/login" element={<Login />} />
+          <Route path="/" element={<AuthRedirect />} />
           <Route path="/" element={<ProtectedRoute />}>
             <Route
               element={
@@ -45,6 +47,16 @@ const App: React.FC = () => {
       </AuthProvider>
     </Router>
   );
+};
+
+const AuthRedirect: React.FC = () => {
+  const { isAuthenticated } = useAuth();
+
+  if (isAuthenticated) {
+    return <Navigate to="/home" />;
+  } else {
+    return <Navigate to="/login" />;
+  }
 };
 
 export default App;

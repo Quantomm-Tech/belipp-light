@@ -1,6 +1,16 @@
 @mixin flex__container--center {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin background__gradient {
+  background: rgb(108, 191, 248);
+  background: linear-gradient(
+    180deg,
+    rgba(108, 191, 248, 0.177) 0%,
+    rgba(108, 191, 248, 0.177) 10%,
+    rgba(255, 255, 255, 0) 99%
+  );
 }
