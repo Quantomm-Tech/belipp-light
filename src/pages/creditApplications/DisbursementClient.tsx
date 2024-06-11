@@ -19,7 +19,12 @@ const DisbursementClient: React.FC<DisbursementClientProps> = ({
       <section className="disbursement__detail__columns principal">
         <div className="row">
           <Typography variant="body1">Destino del crédito:</Typography>
-          <Typography variant="subtitle2">
+          <Typography
+            variant="subtitle2"
+            className="status__grey"
+            pl={1}
+            pr={1}
+          >
             {disbursementClientData.creditType}
           </Typography>
         </div>

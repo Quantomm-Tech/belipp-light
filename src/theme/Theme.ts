@@ -85,7 +85,24 @@ const themeOptions: ThemeOptions = {
         },
       },
     },
-    // Agrega más personalizaciones de componentes según sea necesario
+    MuiBackdrop: {
+      styleOverrides: {
+        root: {
+          backgroundColor: "rgba(53, 93, 120, 0.5)",
+        },
+      },
+    },
+    MuiDivider: {
+      styleOverrides: {
+        root: {
+          width: 124,
+          borderColor: "#b8c5d3",
+          borderBottomWidth: 1.3,
+          marginTop: 8,
+          marginBottom: 8,
+        },
+      },
+    },
   },
 };
 
