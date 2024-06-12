@@ -74,8 +74,6 @@ const CreditApplicationDetail: React.FC = () => {
           requestId: parseInt(`${requestId}`),
           beneficiaryId: parseInt(`1${lateralInformation?.documentNumber}`),
           documentNumber: lateralInformation?.documentNumber,
-          disbursementAmmount: mainInformation?.ammountRequested,
-          paymentDuties: 214280,
           disbursementConfirmation: action === "aceptado" ? true : false,
         };
 
