@@ -12,6 +12,7 @@ import NewTable from "../../UI/table/NewTable";
 import { CreditAplicationService } from "../../api/creditApplication";
 import { useNavigate } from "react-router-dom";
 import Loading from "../../UI/loading/Loading";
+import LocalDataTable from "../../UI/table/LocalDataTable";
 
 const CreditApplications: React.FC = () => {
   const [loading, setLoading] = useState(true);
@@ -66,7 +67,7 @@ const CreditApplications: React.FC = () => {
           </Typography>
           <Divider className="divider" />
           <Box style={{ marginTop: 20 }}>
-            <NewTable
+            {/* <NewTable
               columns={headers}
               rows={tableData}
               order={""}
@@ -93,6 +94,15 @@ const CreditApplications: React.FC = () => {
                 handleRockClick(_row);
               }}
               showPaginator={true}
+            /> */}
+            <LocalDataTable
+              columns={headers}
+              rows={tableData}
+              order={""}
+              orderBy={"desc"}
+              onRowClick={(_row: any) => {
+                handleRockClick(_row);
+              }}
             />
           </Box>
         </Box>
