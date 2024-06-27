@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Divider, Typography } from "@mui/material";
+import { Box, Divider, Typography } from "@mui/material";
 import { getMil } from "../../utils/utils";
 import { MainInformation } from "./CreditApplicationDetail";
 
@@ -12,10 +12,13 @@ const DisbursementClient: React.FC<DisbursementClientProps> = ({
 }) => {
   return (
     <div className="disbursement__detail">
-      <Typography variant="h2" mb={1} color={"primary"}>
-        Datos ingresados por el cliente para desembolso
-      </Typography>
-      <Divider />
+      <Box mb={3}>
+        <Typography variant="h2" mb={1} color={"primary"}>
+          Datos ingresados por el cliente para desembolso
+        </Typography>
+        <Divider />
+      </Box>
+
       <section className="disbursement__detail__columns principal">
         <div className="row">
           <Typography variant="body1">Destino del crédito:</Typography>
@@ -30,8 +33,22 @@ const DisbursementClient: React.FC<DisbursementClientProps> = ({
         </div>
         <div className="row">
           <Typography variant="body1">Valor desembolso:</Typography>
-          <Typography variant="h2">
+          <Typography variant="h2" color="secondary">
             {getMil(disbursementClientData.ammountRequested)}
+          </Typography>
+        </div>
+      </section>
+      <section className="disbursement__detail__columns principal">
+        <div className="row">
+          <Typography variant="body1">Valor cupo:</Typography>
+          <Typography variant="h2" color="secondary">
+            {getMil(disbursementClientData.approvedAmmount)}
+          </Typography>
+        </div>
+        <div className="row">
+          <Typography variant="body1">Valor disponible:</Typography>
+          <Typography variant="h2" color="secondary">
+            {getMil(disbursementClientData.ammountAvailable)}
           </Typography>
         </div>
       </section>

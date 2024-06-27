@@ -19,6 +19,7 @@ import DisbursementClient from "./DisbursementClient";
 import "./CreditApplications.scss";
 import Loading from "../../UI/loading/Loading";
 import CreditApplicationModal from "./CreditApplicationModal";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 
 interface LateralInformation {
   contactNames: string;
@@ -129,11 +130,8 @@ const CreditApplicationDetail: React.FC = () => {
           <Box className="detail__base__disburment">
             <Box className="fixed__information">
               <Box className="client__identity section__rounded">
-                <img
-                  src="https://dyokle9isyhc1.cloudfront.net/AvatarCustomer.png"
-                  alt="Avatar"
-                  className="client__identity--avatar"
-                />
+                <AccountCircleIcon style={{ fontSize: 50 }} />
+
                 <Box className="row" mt={2} mb={1}>
                   <Typography variant="subtitle2">
                     {lateralInformation.contactNames}
