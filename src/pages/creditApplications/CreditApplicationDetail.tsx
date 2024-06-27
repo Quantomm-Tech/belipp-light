@@ -38,6 +38,8 @@ export interface MainInformation {
   banco: string;
   accountType: string;
   accountNumber: string;
+  approvedAmmount: number;
+  ammountAvailable: number;
 }
 
 const CreditApplicationDetail: React.FC = () => {

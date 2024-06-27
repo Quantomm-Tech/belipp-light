@@ -32,7 +32,7 @@ const DisbursementClient: React.FC<DisbursementClientProps> = ({
           </Typography>
         </div>
         <div className="row">
-          <Typography variant="body1">Valor desembolso:</Typography>
+          <Typography variant="body1">Valor solicitado:</Typography>
           <Typography variant="h2" color="secondary">
             {getMil(disbursementClientData.ammountRequested)}
           </Typography>
