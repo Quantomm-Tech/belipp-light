@@ -22,27 +22,27 @@ export const headers = [
   },
   {
     id: "requestsId",
-    label: "Número del crédito",
+    label: "Número de solicitud",
     align: "right",
     sortcol: "CodigoCredito",
   },
   {
     id: "ammountRequested",
-    label: "Valor del crédito",
+    label: "Valor solicitado",
     align: "right",
     isCurrency: true,
     sortcol: "ValorPrestamo",
   },
   {
     id: "requestedDate",
-    label: "Fecha legalizado",
+    label: "Fecha solicitud",
     align: "center",
     sortcol: "FechaSolicitud",
   },
 
   {
     id: "requestStatus",
-    label: "Estado de desembolso",
+    label: "Estado solicitud",
     align: "center",
     sortcol: "EstadoDesembolso",
   },
