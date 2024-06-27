@@ -8,7 +8,6 @@ import { getCells, headers } from "./utils";
 import classes from "./CreditApplications.module.scss";
 import "./CreditApplications.scss";
 
-import NewTable from "../../UI/table/NewTable";
 import { CreditAplicationService } from "../../api/creditApplication";
 import { useNavigate } from "react-router-dom";
 import Loading from "../../UI/loading/Loading";
@@ -17,11 +16,8 @@ import LocalDataTable from "../../UI/table/LocalDataTable";
 const CreditApplications: React.FC = () => {
   const [loading, setLoading] = useState(true);
 
-  const [totalRows, setTotalRows] = useState(0);
-
   const [tableData, setTableData] = useState([]);
 
-  const [resetTablePagination, setResetTablePagination] = useState(false);
   const navigate = useNavigate();
 
   const handleRockClick = (row: any) => {
@@ -42,8 +38,6 @@ const CreditApplications: React.FC = () => {
           const dataFormated = getCells(response.data.data);
           //@ts-ignore
           setTableData(dataFormated);
-
-          setTotalRows(response.data.data.length);
         }
       } catch (error) {
         console.error("Error fetching data:", error);
