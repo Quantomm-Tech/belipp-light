@@ -18,8 +18,8 @@ import { visuallyHidden } from "@mui/utils";
 interface DataTableProps {
   columns: any;
   rows: any[];
-  order: any;
-  orderBy: string;
+  order?: any;
+  orderBy?: string;
   onRowClick: any;
 }
 
@@ -125,9 +125,6 @@ const LocalDataTable: React.FC<DataTableProps> = ({
     event.onClick(row);
   };
 
-  const emptyRows =
-    rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
-
   return (
     <Paper sx={{ width: "100%", overflow: "hidden", boxShadow: "none" }}>
       <TableContainer sx={{ maxHeight: 440 }}>
@@ -169,12 +166,12 @@ const LocalDataTable: React.FC<DataTableProps> = ({
           <TableBody>
             {sortedRows(rows, getComparator(order, orderBy))
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-              .map((item, index) => (
+              .map((item) => (
                 <StyledTableRow
                   hover
-                  role="checkbox"
+                  // role="checkbox"
                   tabIndex={-1}
-                  key={index}
+                  key={item.requestsId}
                   onClick={() => clickRow(item)}
                 >
                   {columns.map(
@@ -207,12 +204,6 @@ const LocalDataTable: React.FC<DataTableProps> = ({
                   )}
                 </StyledTableRow>
               ))}
-
-            {emptyRows > 0 && (
-              <TableRow style={{ height: 53 * emptyRows }}>
-                <TableCell colSpan={3} />
-              </TableRow>
-            )}
           </TableBody>
         </Table>
       </TableContainer>
