@@ -101,7 +101,11 @@ export const getCells = (data: any[]) => {
           requestStatus: element.requestStatus,
           creditType: `<div class='column__status ${getClassColorCreditDestination(
             element.creditType
-          )}'>${element.creditType}</div>`,
+          )}'>${
+            element.creditType === "Adelanto de Nómina"
+              ? "Crédito de libranza"
+              : "Crédito de compra"
+          }</div>`,
         }),
       ];
     }
@@ -115,13 +119,13 @@ export const getClassColorCreditDestination = (status: string) => {
     const colorCreditDestinations = [
       {
         creditDestinationId: 5,
-        description: "Compra Activos",
+        description: "Adelanto de Nómina",
         color: "status__green",
       },
       {
         creditDestinationId: 6,
-        description: "Educacion",
-        color: "status__yellow",
+        description: "Financiación de Producto",
+        color: "status__blue",
       },
       {
         creditDestinationId: 9,
