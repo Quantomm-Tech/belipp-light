@@ -61,34 +61,6 @@ const CreditApplications: React.FC = () => {
           </Typography>
           <Divider className="divider" />
           <Box style={{ marginTop: 20 }}>
-            {/* <NewTable
-              columns={headers}
-              rows={tableData}
-              order={""}
-              orderBy={"desc"}
-              resetTablePagination={resetTablePagination}
-              currentPage={0}
-              totalRows={totalRows}
-              currentRowPage={10}
-              onNextPage={(_pageToSwitch: any, _onTableSetPage: any) => {
-                console.log("Next page");
-              }}
-              onRowsPerPage={(
-                _onTableSetPage: any,
-                _onRowsPerPage: any,
-                _rowsPerPage: any
-              ) => {
-                console.log("onRowsPerPage");
-              }}
-              onResetTablePagination={setResetTablePagination}
-              onRequestSort={(_event: any, _property: any) => {
-                console.log("onRequestSort");
-              }}
-              onRowClick={(_row: any) => {
-                handleRockClick(_row);
-              }}
-              showPaginator={true}
-            /> */}
             <LocalDataTable
               columns={headers}
               rows={tableData}
