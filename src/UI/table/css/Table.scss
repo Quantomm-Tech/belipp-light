@@ -43,3 +43,10 @@
     flex-direction: column;
   }
 }
+
+.comment__colum {
+  max-width: 600px;
+  white-space: normal;
+  overflow-wrap: break-word;
+  word-break: break-word;
+}

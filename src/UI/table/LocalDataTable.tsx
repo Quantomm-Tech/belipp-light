@@ -14,6 +14,7 @@ import {
   tableCellClasses,
 } from "@mui/material";
 import { visuallyHidden } from "@mui/utils";
+import "./css/Table.scss";
 
 interface DataTableProps {
   columns: any;

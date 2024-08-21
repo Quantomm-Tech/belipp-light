@@ -48,6 +48,27 @@ export const headers = [
   },
 ];
 
+export const headersCommentLog = [
+  {
+    id: "date",
+    label: "Fecha",
+    sortcol: "Fecha",
+    align: "left",
+  },
+  {
+    id: "state",
+    label: "Estado",
+    align: "left",
+    sortcol: "Estado",
+  },
+  {
+    id: "comment",
+    label: "Comentario",
+    align: "left",
+    sortcol: "Comentario",
+  },
+];
+
 export const rows = (args: {
   requestsId: any;
   debtorNames: any;
@@ -110,6 +131,22 @@ export const getCells = (data: any[]) => {
       ];
     }
   );
+  return cells;
+};
+
+export const getCellsComments = (data: any[]) => {
+  let cells: any[] = [];
+
+  data.forEach((element: { date: string; state: string; comment: string }) => {
+    cells = [
+      ...cells,
+      {
+        date: element.date,
+        state: element.state,
+        comment: `<div class='comment__colum'>${element.comment}</div>`,
+      },
+    ];
+  });
   return cells;
 };
 
