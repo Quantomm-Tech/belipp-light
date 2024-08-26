@@ -17,6 +17,7 @@ import classes from "./CreditApplications.module.scss";
 import DisbursementClientCompra from "./DisbursementClientCompra";
 import LocalDataTable from "../../UI/table/LocalDataTable";
 import { getCellsComments, headersCommentLog } from "./utils";
+import { MerchantInformation } from "./CreditApplicationDetail";
 
 interface CreditDetailNominaProps {
   lateralInformation: {
@@ -28,6 +29,7 @@ interface CreditDetailNominaProps {
     requestsId: string;
     // otros campos que necesites
   };
+  merchantInformation: MerchantInformation | null;
   action: string;
   handleActionChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   handleBack: () => void;
@@ -39,6 +41,7 @@ interface CreditDetailNominaProps {
 const CreditDetailCompra: React.FC<CreditDetailNominaProps> = ({
   lateralInformation,
   mainInformation,
+  merchantInformation,
   action,
   handleActionChange,
   handleBack,
@@ -147,11 +150,9 @@ const CreditDetailCompra: React.FC<CreditDetailNominaProps> = ({
           <TabPanel value={tabIndex} index={0}>
             {/* Contenido de la pestaña "Datos de la compra" */}
             <DisbursementClientCompra
-              // @ts-ignore
-              disbursementClientData={{
-                ...mainInformation,
-                documentNumber: `${lateralInformation?.documentNumber}`,
-              }}
+              mainInformation={mainInformation}
+              lateralInformation={lateralInformation}
+              merchantInformation={merchantInformation}
             />
 
             <Box className="disbursement__state" mt={4}>

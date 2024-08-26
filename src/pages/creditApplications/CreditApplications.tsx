@@ -2,9 +2,9 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useEffect, useState } from "react";
 
-import { Box, Divider, Typography } from "@mui/material";
+import { Box, Button, Divider, Typography } from "@mui/material";
 
-import { getCells, headers } from "./utils";
+import { getCells, headers, sortedRows } from "./utils";
 import classes from "./CreditApplications.module.scss";
 import "./CreditApplications.scss";
 
@@ -15,6 +15,7 @@ import LocalDataTable from "../../UI/table/LocalDataTable";
 
 const CreditApplications: React.FC = () => {
   const [loading, setLoading] = useState(true);
+  const [loadingRefresh, setLoadingRefresh] = useState(false);
 
   const [tableData, setTableData] = useState([]);
 
@@ -27,27 +28,57 @@ const CreditApplications: React.FC = () => {
       console.log("Error: ", error);
     }
   };
-  useEffect(() => {
-    const fetchApplications = async () => {
-      try {
-        const serviceWellness = new CreditAplicationService();
 
-        const response = await serviceWellness.getCreditApplications();
-
-        if (response.data.isSuccess) {
-          const dataFormated = getCells(response.data.data);
-          //@ts-ignore
-          setTableData(dataFormated);
-        }
-      } catch (error) {
-        console.error("Error fetching data:", error);
-        setLoading(false);
-      } finally {
-        setLoading(false);
-      }
+  const compareByRequestedDate = (a: any, b: any) => {
+    const parseDate = (dateString: string) => {
+      const [datePart, timePart] = dateString.split(" ");
+      const [day, month, year] = datePart.split("/").map(Number);
+      const [hours, minutes, seconds] = timePart.split(":").map(Number);
+      return new Date(year, month - 1, day, hours, minutes, seconds);
     };
 
+    const dateA = parseDate(a.requestedDate);
+    const dateB = parseDate(b.requestedDate);
+    // return dateA.getTime() - dateB.getTime(); // Orden ascendente
+    return dateB.getTime() - dateA.getTime(); // Orden descendente
+  };
+
+  const refreshData = async () => {
+    try {
+      setLoadingRefresh(true);
+      await fetchApplications();
+    } catch (error) {
+      console.log("Error: ", error);
+    } finally {
+      setLoadingRefresh(false);
+    }
+  };
+  const fetchApplications = async () => {
+    try {
+      const serviceWellness = new CreditAplicationService();
+
+      const response = await serviceWellness.getCreditApplications();
+
+      if (response.data.isSuccess) {
+        const initialData = response.data.data;
+        const sortedByDate = sortedRows(initialData, compareByRequestedDate);
+
+        const dataFormated = getCells(sortedByDate);
+
+        //@ts-ignore
+        setTableData(dataFormated);
+      }
+    } catch (error) {
+      console.error("Error fetching data:", error);
+      setLoading(false);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
     fetchApplications();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -56,9 +87,20 @@ const CreditApplications: React.FC = () => {
         <Loading />
       ) : (
         <Box className={`${classes.credit__applications} legalization__base`}>
-          <Typography variant="h2">
-            Solicitudes pendientes de desembolso
-          </Typography>
+          <Box className={classes.credit__applications__top}>
+            <Typography variant="h1">
+              Solicitudes pendientes de desembolso
+            </Typography>
+            <Button
+              variant="contained"
+              onClick={() => {
+                refreshData();
+              }}
+            >
+              Actualizar
+            </Button>
+          </Box>
+
           <Divider className="divider" />
           <Box style={{ marginTop: 20 }}>
             <LocalDataTable
@@ -73,6 +115,8 @@ const CreditApplications: React.FC = () => {
           </Box>
         </Box>
       )}
+
+      {loadingRefresh && <Loading />}
     </>
   );
 };

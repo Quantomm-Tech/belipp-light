@@ -1,16 +1,20 @@
 import * as React from "react";
 import { Box, Divider, Typography } from "@mui/material";
 import { getMil } from "../../utils/utils";
-import { MainInformation } from "./CreditApplicationDetail";
+import {
+  LateralInformation,
+  MainInformation,
+  MerchantInformation,
+} from "./CreditApplicationDetail";
 
 interface DisbursementClientProps {
-  disbursementClientData: MainInformation;
+  mainInformation: MainInformation;
+  lateralInformation: LateralInformation;
+  merchantInformation: MerchantInformation;
 }
 
-const DisbursementClientCompra: React.FC<DisbursementClientProps> = ({
-  disbursementClientData,
-}) => {
-  console.log("disbursementClientData: ", disbursementClientData);
+const DisbursementClientCompra: React.FC<DisbursementClientProps> = (props) => {
+  const { mainInformation, lateralInformation, merchantInformation } = props;
   return (
     <div className="disbursement__detail">
       <Box mb={3}>
@@ -29,13 +33,13 @@ const DisbursementClientCompra: React.FC<DisbursementClientProps> = ({
             pl={1}
             pr={1}
           >
-            {disbursementClientData.creditType}
+            {mainInformation.creditType}
           </Typography>
         </div>
         <div className="row">
           <Typography variant="body1">Valor solicitado:</Typography>
           <Typography variant="h2" color="secondary">
-            {getMil(disbursementClientData.ammountRequested)}
+            {getMil(mainInformation.ammountRequested)}
           </Typography>
         </div>
         <div className="row">
@@ -54,13 +58,13 @@ const DisbursementClientCompra: React.FC<DisbursementClientProps> = ({
           <div className="row">
             <Typography variant="body1">Nombre del beneficiario:</Typography>
             <Typography variant="subtitle2">
-              {disbursementClientData.contactNames}
+              {mainInformation.contactNames}
             </Typography>
           </div>
           <div className="row">
             <Typography variant="body1">Número de identificación:</Typography>
             <Typography variant="subtitle2">
-              {disbursementClientData.documentNumber}
+              {lateralInformation.documentNumber}
             </Typography>
           </div>
           <div className="row">
@@ -79,14 +83,14 @@ const DisbursementClientCompra: React.FC<DisbursementClientProps> = ({
           <div className="row">
             <Typography variant="body1">Número de la solicitud: </Typography>
             <Typography variant="subtitle2">
-              {disbursementClientData.requestsId}
+              {mainInformation.requestsId}
             </Typography>
           </div>
 
           <div className="row">
             <Typography variant="body1">Fecha de la solicitud:</Typography>
             <Typography variant="subtitle2">
-              {disbursementClientData.requestedDate}
+              {mainInformation.requestedDate}
             </Typography>
           </div>
         </div>
@@ -99,37 +103,49 @@ const DisbursementClientCompra: React.FC<DisbursementClientProps> = ({
         <div className="column__one">
           <div className="row">
             <Typography variant="body1">Nombre del comercio:</Typography>
-            <Typography variant="subtitle2">Apple - PD</Typography>
+            <Typography variant="subtitle2">
+              {merchantInformation.merchantName}
+            </Typography>
           </div>
           <div className="row">
             <Typography variant="body1">Código del producto:</Typography>
-            <Typography variant="subtitle2">454545 - PD</Typography>
+            <Typography variant="subtitle2">
+              {merchantInformation.merchantId}
+            </Typography>
           </div>
           <div className="row">
             <Typography variant="body1">Teléfono:</Typography>
-            <Typography variant="subtitle2">+57 3215050468 - PD</Typography>
+            <Typography variant="subtitle2">
+              {merchantInformation.phoneContact}
+            </Typography>
           </div>
           <div className="row">
             <Typography variant="body1">Correo electrónico:</Typography>
             <Typography variant="subtitle2">
-              lizeth.rodriguez@quantomm.tech - PD
+              {merchantInformation.merchantMail}
             </Typography>
           </div>
         </div>
         <div className="column__two">
           <div className="row">
             <Typography variant="body1">Banco:</Typography>
-            <Typography variant="subtitle2">Lulo - PD</Typography>
+            <Typography variant="subtitle2">
+              {merchantInformation.merchantBank}
+            </Typography>
           </div>
 
           <div className="row">
             <Typography variant="body1">Número de cuenta: </Typography>
-            <Typography variant="subtitle2">54448f8a48f4848 - PD</Typography>
+            <Typography variant="subtitle2">
+              {merchantInformation.merchantNumberBankAccount}
+            </Typography>
           </div>
 
           <div className="row">
             <Typography variant="body1">Tipo de cuenta:</Typography>
-            <Typography variant="subtitle2">Ahorro - PD</Typography>
+            <Typography variant="subtitle2">
+              {merchantInformation.merchantTypeBankAccount}
+            </Typography>
           </div>
         </div>
       </section>

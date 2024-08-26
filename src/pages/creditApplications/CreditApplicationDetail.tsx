@@ -22,7 +22,7 @@ import CreditApplicationModal from "./CreditApplicationModal";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import CreditDetailCompra from "./CreditDetailCompra";
 
-interface LateralInformation {
+export interface LateralInformation {
   contactNames: string;
   creditLimitId: string;
   documentNumber: string;
@@ -42,6 +42,16 @@ export interface MainInformation {
   approvedAmmount: number;
   ammountAvailable: number;
   requestsId?: string;
+}
+
+export interface MerchantInformation {
+  merchantBank: string;
+  merchantId: number;
+  merchantMail: string;
+  merchantName: string;
+  merchantNumberBankAccount: number;
+  merchantTypeBankAccount: string;
+  phoneContact: string;
 }
 
 interface CreditDetailNominaProps {
@@ -172,6 +182,8 @@ const CreditApplicationDetail: React.FC = () => {
     useState<LateralInformation | null>(null);
   const [mainInformation, setMainInformation] =
     useState<MainInformation | null>(null);
+  const [merchantInformation, setMerchantInformation] =
+    useState<MerchantInformation | null>(null);
 
   const [action, setAction] = useState<string>("");
   const [showUpdateModal, setShowUpdateModal] = useState(false);
@@ -268,6 +280,9 @@ const CreditApplicationDetail: React.FC = () => {
           if (response.data.isSuccess) {
             setMainInformation(response.data.data.mainInformation);
             setLateralInformation(response.data.data.lateralInformation);
+            if (response.data.data?.merchantInformation) {
+              setMerchantInformation(response.data.data.merchantInformation);
+            }
           }
         }
       } catch (error) {
@@ -304,6 +319,7 @@ const CreditApplicationDetail: React.FC = () => {
             lateralInformation={lateralInformation}
             // @ts-ignore
             mainInformation={mainInformation}
+            merchantInformation={merchantInformation}
             action={action}
             handleActionChange={handleActionChange}
             handleBack={handleBack}
