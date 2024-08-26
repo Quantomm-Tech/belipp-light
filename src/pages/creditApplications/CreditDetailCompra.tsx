@@ -17,19 +17,16 @@ import classes from "./CreditApplications.module.scss";
 import DisbursementClientCompra from "./DisbursementClientCompra";
 import LocalDataTable from "../../UI/table/LocalDataTable";
 import { getCellsComments, headersCommentLog } from "./utils";
-import { MerchantInformation } from "./CreditApplicationDetail";
+import {
+  LateralInformation,
+  MainInformation,
+  MerchantInformation,
+} from "./CreditApplicationDetail";
 
 interface CreditDetailNominaProps {
-  lateralInformation: {
-    contactNames: string;
-    documentNumber: string;
-    // otros campos que necesites
-  };
-  mainInformation: {
-    requestsId: string;
-    // otros campos que necesites
-  };
-  merchantInformation: MerchantInformation | null;
+  lateralInformation: LateralInformation;
+  mainInformation: MainInformation;
+  merchantInformation?: MerchantInformation | null;
   action: string;
   handleActionChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   handleBack: () => void;

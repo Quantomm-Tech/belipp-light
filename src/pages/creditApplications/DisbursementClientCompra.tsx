@@ -10,7 +10,7 @@ import {
 interface DisbursementClientProps {
   mainInformation: MainInformation;
   lateralInformation: LateralInformation;
-  merchantInformation: MerchantInformation;
+  merchantInformation?: MerchantInformation | null;
 }
 
 const DisbursementClientCompra: React.FC<DisbursementClientProps> = (props) => {
@@ -96,59 +96,63 @@ const DisbursementClientCompra: React.FC<DisbursementClientProps> = (props) => {
         </div>
       </section>
 
-      <Typography variant="h2" mt={2} mb={2} color="primary">
-        Datos del comercio
-      </Typography>
-      <section className="disbursement__detail__columns">
-        <div className="column__one">
-          <div className="row">
-            <Typography variant="body1">Nombre del comercio:</Typography>
-            <Typography variant="subtitle2">
-              {merchantInformation.merchantName}
-            </Typography>
-          </div>
-          <div className="row">
-            <Typography variant="body1">Código del producto:</Typography>
-            <Typography variant="subtitle2">
-              {merchantInformation.merchantId}
-            </Typography>
-          </div>
-          <div className="row">
-            <Typography variant="body1">Teléfono:</Typography>
-            <Typography variant="subtitle2">
-              {merchantInformation.phoneContact}
-            </Typography>
-          </div>
-          <div className="row">
-            <Typography variant="body1">Correo electrónico:</Typography>
-            <Typography variant="subtitle2">
-              {merchantInformation.merchantMail}
-            </Typography>
-          </div>
-        </div>
-        <div className="column__two">
-          <div className="row">
-            <Typography variant="body1">Banco:</Typography>
-            <Typography variant="subtitle2">
-              {merchantInformation.merchantBank}
-            </Typography>
-          </div>
+      {merchantInformation && (
+        <>
+          <Typography variant="h2" mt={2} mb={2} color="primary">
+            Datos del comercio
+          </Typography>
+          <section className="disbursement__detail__columns">
+            <div className="column__one">
+              <div className="row">
+                <Typography variant="body1">Nombre del comercio:</Typography>
+                <Typography variant="subtitle2">
+                  {merchantInformation.merchantName}
+                </Typography>
+              </div>
+              <div className="row">
+                <Typography variant="body1">Código del producto:</Typography>
+                <Typography variant="subtitle2">
+                  {merchantInformation.merchantId}
+                </Typography>
+              </div>
+              <div className="row">
+                <Typography variant="body1">Teléfono:</Typography>
+                <Typography variant="subtitle2">
+                  {merchantInformation.phoneContact}
+                </Typography>
+              </div>
+              <div className="row">
+                <Typography variant="body1">Correo electrónico:</Typography>
+                <Typography variant="subtitle2">
+                  {merchantInformation.merchantMail}
+                </Typography>
+              </div>
+            </div>
+            <div className="column__two">
+              <div className="row">
+                <Typography variant="body1">Banco:</Typography>
+                <Typography variant="subtitle2">
+                  {merchantInformation.merchantBank}
+                </Typography>
+              </div>
 
-          <div className="row">
-            <Typography variant="body1">Número de cuenta: </Typography>
-            <Typography variant="subtitle2">
-              {merchantInformation.merchantNumberBankAccount}
-            </Typography>
-          </div>
+              <div className="row">
+                <Typography variant="body1">Número de cuenta: </Typography>
+                <Typography variant="subtitle2">
+                  {merchantInformation.merchantNumberBankAccount}
+                </Typography>
+              </div>
 
-          <div className="row">
-            <Typography variant="body1">Tipo de cuenta:</Typography>
-            <Typography variant="subtitle2">
-              {merchantInformation.merchantTypeBankAccount}
-            </Typography>
-          </div>
-        </div>
-      </section>
+              <div className="row">
+                <Typography variant="body1">Tipo de cuenta:</Typography>
+                <Typography variant="subtitle2">
+                  {merchantInformation.merchantTypeBankAccount}
+                </Typography>
+              </div>
+            </div>
+          </section>
+        </>
+      )}
     </div>
   );
 };
