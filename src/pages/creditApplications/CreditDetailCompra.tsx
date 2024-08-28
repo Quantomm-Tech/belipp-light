@@ -206,7 +206,7 @@ const CreditDetailCompra: React.FC<CreditDetailNominaProps> = ({
                 onClick={handleSubmit}
                 disabled={action === ""}
               >
-                Confirmar 2
+                Confirmar
               </Button>
             </Box>
           </TabPanel>
