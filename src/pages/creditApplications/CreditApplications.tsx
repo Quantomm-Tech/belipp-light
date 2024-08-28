@@ -106,8 +106,6 @@ const CreditApplications: React.FC = () => {
             <LocalDataTable
               columns={headers}
               rows={tableData}
-              order={""}
-              orderBy={"desc"}
               onRowClick={(_row: any) => {
                 handleRockClick(_row);
               }}

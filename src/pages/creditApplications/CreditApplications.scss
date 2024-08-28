@@ -220,10 +220,8 @@
     margin: 84px 0px 10px;
     padding: 10px 10px 12% 10px;
     border: none !important;
-    // height: fit-content !important;
 
     height: 90vh;
-    // min-height: 800px;
     overflow-y: auto;
 
     svg {
@@ -405,7 +403,6 @@
     display: flex;
     padding-top: 20px;
     .fixed__information {
-      // height: 724px;
       .row {
         display: flex;
         flex-direction: column;
@@ -521,7 +518,7 @@
     .detail__informaiton {
       width: 100%;
       margin: 0px 0px 10px 30px;
-      // height: 724px;
+
       .tabpanel__credit {
         padding: 10px 0;
         max-width: 1200px;
@@ -678,7 +675,7 @@
             align-items: center;
             padding: 0 25px;
             border-bottom: 1.3px solid #cddce8;
-            // width: 100%;
+
             height: 41px;
             .key {
               font-family: $strawfordnormal;
@@ -896,4 +893,10 @@
   border: 1.3px solid #525df2;
   border-radius: 4px;
   color: #525df2 !important;
+}
+
+.capitalize {
+  ::first-letter {
+    text-transform: uppercase;
+  }
 }

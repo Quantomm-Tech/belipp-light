@@ -13,3 +13,9 @@
 .credit__detail {
   padding: 20px;
 }
+
+.capitalize {
+  ::first-letter {
+    text-transform: uppercase;
+  }
+}

@@ -5,16 +5,23 @@ import {
   LateralInformation,
   MainInformation,
   MerchantInformation,
+  StatusCreditInformation,
 } from "./CreditApplicationDetail";
 
 interface DisbursementClientProps {
   mainInformation: MainInformation;
   lateralInformation: LateralInformation;
   merchantInformation?: MerchantInformation | null;
+  statusCreditInformation: StatusCreditInformation;
 }
 
 const DisbursementClientCompra: React.FC<DisbursementClientProps> = (props) => {
-  const { mainInformation, lateralInformation, merchantInformation } = props;
+  const {
+    mainInformation,
+    lateralInformation,
+    merchantInformation,
+    statusCreditInformation,
+  } = props;
   return (
     <div className="disbursement__detail">
       <Box mb={3}>
@@ -44,8 +51,12 @@ const DisbursementClientCompra: React.FC<DisbursementClientProps> = (props) => {
         </div>
         <div className="row">
           <Typography variant="body1">Estado de la solicitud:</Typography>
-          <Typography variant="subtitle2" color="secondary">
-            Aceptado - PD
+          <Typography
+            variant="subtitle2"
+            color="secondary"
+            className="capitalize"
+          >
+            {statusCreditInformation.requestStatus}
           </Typography>
         </div>
       </section>
@@ -69,7 +80,9 @@ const DisbursementClientCompra: React.FC<DisbursementClientProps> = (props) => {
           </div>
           <div className="row">
             <Typography variant="body1">Teléfono:</Typography>
-            <Typography variant="subtitle2">+57 3215050468 - PD</Typography>
+            <Typography variant="subtitle2">
+              {lateralInformation.phoneNumber}
+            </Typography>
           </div>
         </div>
         <div className="column__two">

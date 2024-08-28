@@ -16,17 +16,23 @@ import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import classes from "./CreditApplications.module.scss";
 import DisbursementClientCompra from "./DisbursementClientCompra";
 import LocalDataTable from "../../UI/table/LocalDataTable";
-import { getCellsComments, headersCommentLog } from "./utils";
+import {
+  getCellsComments,
+  headersCommentLog,
+  transformAnalystComments,
+} from "./utils";
 import {
   LateralInformation,
   MainInformation,
   MerchantInformation,
+  StatusCreditInformation,
 } from "./CreditApplicationDetail";
 
 interface CreditDetailNominaProps {
   lateralInformation: LateralInformation;
   mainInformation: MainInformation;
   merchantInformation?: MerchantInformation | null;
+  statusCreditInformation: StatusCreditInformation;
   action: string;
   handleActionChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   handleBack: () => void;
@@ -39,6 +45,7 @@ const CreditDetailCompra: React.FC<CreditDetailNominaProps> = ({
   lateralInformation,
   mainInformation,
   merchantInformation,
+  statusCreditInformation,
   action,
   handleActionChange,
   handleBack,
@@ -56,47 +63,23 @@ const CreditDetailCompra: React.FC<CreditDetailNominaProps> = ({
 
   useEffect(() => {
     const fetchApplications = async () => {
-      const dummyComments = [
-        {
-          date: "24/08/2024",
-          state: "Procesando tu pedido",
-          comment:
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam sed leo in justo dapibus semper. Proin eu felis volutpat, porta mi sed, tempor leo. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nam lobortis a purus non egestas. Donec faucibus sapien dui, ac ultricies nisi scelerisque nec. Fusce ultricies leo nec turpis tincidunt tincidunt. Maecenas lacus ante, luctus sit amet consequat ut, mollis in libero. Ut et commodo nibh, posuere luctus eroswe.",
-        },
-        {
-          date: "26/08/2024",
-          state: "Producto en camino",
-          comment:
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam sed leo in justo dapibus semper. Proin eu felis volutpat, porta mi sed, tempor leo. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nam lobortis a purus non egestas. Donec faucibus sapien dui, ac ultricies nisi scelerisque nec. Fusce ultricies leo nec turpis tincidunt tincidunt. Maecenas lacus ante, luctus sit amet consequat ut, mollis in libero. Ut et commodo nibh, posuere luctus eroswe.",
-        },
-      ];
+      try {
+        const dataComments = transformAnalystComments(
+          // @ts-ignore
+          statusCreditInformation.analystComments
+        );
 
-      const dataFormated = getCellsComments(dummyComments);
+        const dataFormated = getCellsComments(dataComments);
 
-      //@ts-ignore
-      setTableData(dataFormated);
-
-      // try {
-      //   const serviceWellness = new CreditAplicationService();
-
-      //   const response = await serviceWellness.getCreditApplications();
-
-      //   if (response.data.isSuccess) {
-      //     const dataFormated = getCells(response.data.data);
-      //     //@ts-ignore
-
-      //     console.log("dataFormated: ", dataFormated);
-      //     setTableData(dataFormated);
-      //   }
-      // } catch (error) {
-      //   console.error("Error fetching data:", error);
-      //   // setLoading(false);
-      // } finally {
-      //   // setLoading(false);
-      // }
+        //@ts-ignore
+        setTableData(dataFormated);
+      } catch (error) {
+        console.log("Error: ", error);
+      }
     };
 
     fetchApplications();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -134,14 +117,16 @@ const CreditDetailCompra: React.FC<CreditDetailNominaProps> = ({
                 fontWeight: tabIndex === 0 ? "700" : "500",
               }}
             />
-            <Tab
-              label="Log comentarios"
-              sx={{
-                textTransform: "initial",
-                fontSize: 16,
-                fontWeight: tabIndex === 1 ? "700" : "500",
-              }}
-            />
+            {tableData.length > 0 && (
+              <Tab
+                label="Log comentarios"
+                sx={{
+                  textTransform: "initial",
+                  fontSize: 16,
+                  fontWeight: tabIndex === 1 ? "700" : "500",
+                }}
+              />
+            )}
           </Tabs>
 
           <TabPanel value={tabIndex} index={0}>
@@ -150,6 +135,7 @@ const CreditDetailCompra: React.FC<CreditDetailNominaProps> = ({
               mainInformation={mainInformation}
               lateralInformation={lateralInformation}
               merchantInformation={merchantInformation}
+              statusCreditInformation={statusCreditInformation}
             />
 
             <Box className="disbursement__state" mt={4}>
@@ -163,7 +149,7 @@ const CreditDetailCompra: React.FC<CreditDetailNominaProps> = ({
                 className="disbursement__radio"
               >
                 <FormControlLabel
-                  value="procesando"
+                  value="Procesando tu pedido"
                   control={<Radio />}
                   label={
                     <Typography variant="subtitle1">
@@ -172,7 +158,7 @@ const CreditDetailCompra: React.FC<CreditDetailNominaProps> = ({
                   }
                 />
                 <FormControlLabel
-                  value="encamino"
+                  value="Producto en camino"
                   control={<Radio />}
                   label={
                     <Typography variant="subtitle1">
@@ -181,7 +167,7 @@ const CreditDetailCompra: React.FC<CreditDetailNominaProps> = ({
                   }
                 />
                 <FormControlLabel
-                  value="entregado"
+                  value="Producto entregado"
                   control={<Radio />}
                   label={
                     <Typography variant="subtitle1">
@@ -197,15 +183,17 @@ const CreditDetailCompra: React.FC<CreditDetailNominaProps> = ({
                 Comentarios
               </Typography>
               <Divider />
-              <TextField
-                multiline
-                rows={4}
-                fullWidth
-                variant="outlined"
-                placeholder="Escribe aquí los comentarios del estado de compra..."
-                value={comments}
-                onChange={handleCommentsChange}
-              />
+              <Box mt={2}>
+                <TextField
+                  multiline
+                  rows={4}
+                  fullWidth
+                  variant="outlined"
+                  placeholder="Escribe aquí los comentarios del estado de compra..."
+                  value={comments}
+                  onChange={handleCommentsChange}
+                />
+              </Box>
             </Box>
 
             <Box className="disbursement__action" mt={2} mb={4}>
@@ -216,22 +204,18 @@ const CreditDetailCompra: React.FC<CreditDetailNominaProps> = ({
                 variant="contained"
                 color="primary"
                 onClick={handleSubmit}
-                disabled={action === "" ? true : false}
+                disabled={action === ""}
               >
-                Confirmar
+                Confirmar 2
               </Button>
             </Box>
           </TabPanel>
 
           <TabPanel value={tabIndex} index={1}>
-            {/* Contenido de la pestaña "Log comentarios" */}
-
             <Box style={{ marginTop: 20 }}>
               <LocalDataTable
                 columns={headersCommentLog}
                 rows={tableData}
-                order={""}
-                orderBy={"desc"}
                 onRowClick={() => {
                   console.log("onClick");
                 }}
@@ -250,7 +234,7 @@ interface TabPanelProps {
   value: any;
 }
 
-function TabPanel(props: TabPanelProps) {
+function TabPanel(props: Readonly<TabPanelProps>) {
   const { children, value, index, ...other } = props;
 
   return (

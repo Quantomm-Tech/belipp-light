@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { getMil } from "../../utils/utils";
+import { AnalystComments } from "./CreditApplicationDetail";
 
 export const headers = [
   {
@@ -199,4 +200,19 @@ export const sortedRows = (
     return a[1] - b[1];
   });
   return stabilizedThis.map((el) => el[0]);
+};
+
+export const transformAnalystComments = (analystComments: AnalystComments) => {
+  return Object.entries(analystComments)
+    .map(([state, comments]) => {
+      return comments.map((comment) => {
+        const [datetime, commentText] = Object.entries(comment)[0];
+        return {
+          date: datetime,
+          state,
+          comment: commentText,
+        };
+      });
+    })
+    .flat();
 };

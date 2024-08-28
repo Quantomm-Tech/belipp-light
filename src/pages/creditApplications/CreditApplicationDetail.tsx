@@ -28,6 +28,7 @@ export interface LateralInformation {
   documentNumber: string;
   companyName: string;
   NIT: string;
+  phoneNumber: number;
 }
 
 export interface MainInformation {
@@ -53,16 +54,33 @@ export interface MerchantInformation {
   merchantTypeBankAccount: string;
   phoneContact: string;
 }
+export type AnalystComment = {
+  [key: string]: string;
+};
+
+export type AnalystComments = {
+  [state: string]: AnalystComment[];
+};
+
+export type TransformedComment = {
+  date: string;
+  state: string;
+  comment: string;
+};
+
+export interface StatusCreditInformation {
+  analystComments: AnalystComment;
+  requestStatus: string;
+  stageStatus: boolean;
+}
 
 interface CreditDetailNominaProps {
   lateralInformation: LateralInformation;
   mainInformation: MainInformation;
   action: string;
-  comments?: string;
   handleActionChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   handleBack: () => void;
   handleSubmit: () => void;
-  handleCommentsChange?: () => void;
 }
 
 const CreditDetailNomina: React.FC<CreditDetailNominaProps> = ({
@@ -143,12 +161,12 @@ const CreditDetailNomina: React.FC<CreditDetailNominaProps> = ({
               className="disbursement__radio"
             >
               <FormControlLabel
-                value="aceptado"
+                value="Aceptado"
                 control={<Radio />}
                 label={<Typography variant="subtitle1">Aceptado</Typography>}
               />
               <FormControlLabel
-                value="rechazado"
+                value="Rechazado"
                 control={<Radio />}
                 label={<Typography variant="subtitle1">Rechazado</Typography>}
               />
@@ -165,9 +183,9 @@ const CreditDetailNomina: React.FC<CreditDetailNominaProps> = ({
           variant="contained"
           color="primary"
           onClick={handleSubmit}
-          disabled={action === "" ? true : false}
+          disabled={action === ""}
         >
-          Confirmar
+          Confirmar 1
         </Button>
       </Box>
     </Box>
@@ -184,6 +202,8 @@ const CreditApplicationDetail: React.FC = () => {
     useState<MainInformation | null>(null);
   const [merchantInformation, setMerchantInformation] =
     useState<MerchantInformation | null>(null);
+  const [statusCreditInformation, setStatusCreditInformation] =
+    useState<StatusCreditInformation | null>(null);
 
   const [action, setAction] = useState<string>("");
   const [showUpdateModal, setShowUpdateModal] = useState(false);
@@ -217,7 +237,8 @@ const CreditApplicationDetail: React.FC = () => {
           requestId: parseInt(`${requestId}`),
           beneficiaryId: parseInt(`1${lateralInformation?.documentNumber}`),
           documentNumber: lateralInformation?.documentNumber,
-          disbursementConfirmation: action === "aceptado" ? true : false,
+          disbursementConfirmation: action,
+          analystComments: "",
         };
 
         const response = await serviceWellness.updateCreditApplication(body);
@@ -240,22 +261,23 @@ const CreditApplicationDetail: React.FC = () => {
     if (action) {
       try {
         setLoading(true);
-        // const serviceWellness = new CreditAplicationService();
+        const serviceWellness = new CreditAplicationService();
 
         const body = {
           requestId: parseInt(`${requestId}`),
           beneficiaryId: parseInt(`1${lateralInformation?.documentNumber}`),
           documentNumber: lateralInformation?.documentNumber,
+          // disbursementAmmount: 239270,
+          // paymentDuties: 239270,
           disbursementConfirmation: action,
-          comments: comments,
+          analystComments: comments,
         };
-        console.log("body: ", body);
 
-        // const response = await serviceWellness.updateCreditApplication(body);
+        const response = await serviceWellness.updateCreditApplication(body);
 
-        // if (response.data.isSuccess) {
-        //   setShowUpdateModal(true);
-        // }
+        if (response.data.isSuccess) {
+          setShowUpdateModal(true);
+        }
       } catch (error) {
         console.error("Error fetching data:", error);
         setLoading(false);
@@ -283,6 +305,9 @@ const CreditApplicationDetail: React.FC = () => {
             if (response.data.data?.merchantInformation) {
               setMerchantInformation(response.data.data.merchantInformation);
             }
+            if (response.data.data?.statusInformation) {
+              setStatusCreditInformation(response.data.data.statusInformation);
+            }
           }
         }
       } catch (error) {
@@ -297,8 +322,6 @@ const CreditApplicationDetail: React.FC = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  console.log("mainInformation: ", mainInformation);
-  console.log("lateralInformation: ", lateralInformation);
   return (
     <>
       {loading && <Loading />}
@@ -320,6 +343,8 @@ const CreditApplicationDetail: React.FC = () => {
             // @ts-ignore
             mainInformation={mainInformation}
             merchantInformation={merchantInformation}
+            // @ts-ignore
+            statusCreditInformation={statusCreditInformation}
             action={action}
             handleActionChange={handleActionChange}
             handleBack={handleBack}

@@ -19,8 +19,6 @@ import "./css/Table.scss";
 interface DataTableProps {
   columns: any;
   rows: any[];
-  order?: any;
-  orderBy?: string;
   onRowClick: any;
 }
 
