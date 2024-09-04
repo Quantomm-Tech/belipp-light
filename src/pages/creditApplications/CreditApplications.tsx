@@ -39,7 +39,7 @@ const CreditApplications: React.FC = () => {
 
     const dateA = parseDate(a.requestedDate);
     const dateB = parseDate(b.requestedDate);
-    // return dateA.getTime() - dateB.getTime(); // Orden ascendente
+
     return dateB.getTime() - dateA.getTime(); // Orden descendente
   };
 

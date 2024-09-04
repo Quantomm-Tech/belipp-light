@@ -7,6 +7,7 @@ import {
   MerchantInformation,
   StatusCreditInformation,
 } from "./CreditApplicationDetail";
+import { getClassColorCreditDestination } from "./utils";
 
 interface DisbursementClientProps {
   mainInformation: MainInformation;
@@ -36,11 +37,15 @@ const DisbursementClientCompra: React.FC<DisbursementClientProps> = (props) => {
           <Typography variant="body1">Destino del crédito:</Typography>
           <Typography
             variant="subtitle2"
-            className="status__grey"
             pl={1}
             pr={1}
+            className={`column__status ${getClassColorCreditDestination(
+              mainInformation.creditType
+            )}`}
           >
-            {mainInformation.creditType}
+            {mainInformation.creditType === "Financiación de Producto"
+              ? "Crédito de compra"
+              : "Crédito de libranza"}
           </Typography>
         </div>
         <div className="row">

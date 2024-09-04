@@ -44,7 +44,7 @@ export const headers = [
   {
     id: "requestStatus",
     label: "Estado solicitud",
-    align: "center",
+    align: "left",
     sortcol: "EstadoDesembolso",
   },
 ];
@@ -120,7 +120,7 @@ export const getCells = (data: any[]) => {
           ammountRequested: getMil(element.ammountRequested),
           documentNumber: element.documentNumber,
           requestedDate: `${element.requestedDate.split(" ")[0]}`,
-          requestStatus: element.requestStatus,
+          requestStatus: `<div class='column__request__status'><span>${element.requestStatus}</span><div>`,
           creditType: `<div class='column__status ${getClassColorCreditDestination(
             element.creditType
           )}'>${
@@ -158,12 +158,12 @@ export const getClassColorCreditDestination = (status: string) => {
       {
         creditDestinationId: 5,
         description: "Adelanto de Nómina",
-        color: "status__green",
+        color: "status__blue",
       },
       {
         creditDestinationId: 6,
         description: "Financiación de Producto",
-        color: "status__blue",
+        color: "status__green",
       },
       {
         creditDestinationId: 9,

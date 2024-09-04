@@ -12,6 +12,8 @@ import {
   TableSortLabel,
   styled,
   tableCellClasses,
+  useTheme,
+  useMediaQuery,
 } from "@mui/material";
 import { visuallyHidden } from "@mui/utils";
 import "./css/Table.scss";
@@ -61,6 +63,9 @@ const LocalDataTable: React.FC<DataTableProps> = ({
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const [order, setOrder] = useState<"asc" | "desc">("asc");
   const [orderBy, setOrderBy] = useState<string>("");
+
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
   const handleRequestSort = (property: string) => {
     const isAsc = orderBy === property && order === "asc";
@@ -214,7 +219,7 @@ const LocalDataTable: React.FC<DataTableProps> = ({
         page={page}
         onPageChange={handleChangePage}
         onRowsPerPageChange={handleChangeRowsPerPage}
-        labelRowsPerPage="Filas por página"
+        labelRowsPerPage={isMobile ? "" : "Filas por página"}
         labelDisplayedRows={({ from, to, count }) =>
           `${from} - ${to} de ${count}`
         }

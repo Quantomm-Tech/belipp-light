@@ -131,9 +131,20 @@
       padding: 2px;
       font-weight: 700;
       font-size: 15px !important;
+      text-transform: lowercase;
+    }
+    .column__status::first-letter {
+      text-transform: capitalize;
     }
 
     text-transform: capitalize;
+
+    .column__request__status {
+      text-transform: lowercase;
+    }
+    .column__request__status::first-letter {
+      text-transform: capitalize;
+    }
   }
 
   .MuiTableCell-root.MuiTableCell-body:nth-child(1),
@@ -150,11 +161,11 @@
   }
   .MuiTableCell-root.MuiTableCell-body:nth-child(4),
   .MuiTableCell-root.MuiTableCell-head:nth-child(4) {
-    width: 15%;
+    width: 14%;
   }
   .MuiTableCell-root.MuiTableCell-body:nth-child(5),
   .MuiTableCell-root.MuiTableCell-head:nth-child(5) {
-    width: 15%;
+    width: 12%;
   }
   .MuiTableCell-root.MuiTableCell-body:nth-child(6),
   .MuiTableCell-root.MuiTableCell-head:nth-child(6) {
@@ -162,7 +173,7 @@
   }
   .MuiTableCell-root.MuiTableCell-body:nth-child(7),
   .MuiTableCell-root.MuiTableCell-head:nth-child(7) {
-    width: 10%;
+    width: 14%;
   }
 
   .right {
@@ -898,5 +909,103 @@
 .capitalize {
   ::first-letter {
     text-transform: uppercase;
+  }
+}
+
+.status__green {
+  background: #f0f5ff;
+  border: 1.3px solid #00b086;
+  border-radius: 4px;
+  color: #00b086 !important;
+}
+.status__blue {
+  background: #f0f5ff;
+  border: 1.3px solid #525df2;
+  border-radius: 4px;
+  color: #525df2 !important;
+}
+
+@media (max-width: 478px) {
+  .detail__disburment {
+    .detail__base__disburment {
+      flex-direction: column;
+
+      .detail__informaiton {
+        margin: 0;
+
+        .disbursement__detail {
+          .disbursement__detail__columns.principal {
+            div.row {
+              width: 100%;
+              flex-direction: column;
+              height: fit-content;
+              padding: 5px 0;
+            }
+          }
+
+          .disbursement__detail__columns {
+            flex-direction: column;
+            width: 100%;
+            .column__one,
+            .column__two {
+              width: 100%;
+
+              .row {
+                width: 100%;
+                flex-direction: column;
+                height: fit-content;
+                padding: 5px 0;
+              }
+            }
+          }
+        }
+      }
+
+      .fixed__information {
+        .section__rounded {
+          width: 100%;
+        }
+      }
+    }
+  }
+  .disbursement__state {
+    margin-bottom: 16px;
+  }
+  .disbursement__action {
+    flex-direction: column;
+    button {
+      margin-bottom: 10px;
+    }
+  }
+
+  .notification__modal {
+    margin: 20% 10px;
+    .notification__content {
+      flex-direction: column;
+      .notification__main {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        padding: 5px;
+      }
+    }
+
+    .MuiDialogContent-root {
+      padding: 10px;
+
+      h1 {
+        text-align: center;
+      }
+    }
+
+    .notification__image {
+      text-align: center;
+    }
+
+    .notification__modal--actions {
+      button {
+        min-width: 100%;
+      }
+    }
   }
 }

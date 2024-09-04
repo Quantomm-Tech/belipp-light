@@ -2,6 +2,7 @@ import * as React from "react";
 import { Box, Divider, Typography } from "@mui/material";
 import { getMil } from "../../utils/utils";
 import { MainInformation } from "./CreditApplicationDetail";
+import { getClassColorCreditDestination } from "./utils";
 
 interface DisbursementClientProps {
   disbursementClientData: MainInformation;
@@ -24,11 +25,15 @@ const DisbursementClient: React.FC<DisbursementClientProps> = ({
           <Typography variant="body1">Destino del crédito:</Typography>
           <Typography
             variant="subtitle2"
-            className="status__grey"
+            className={`column__status ${getClassColorCreditDestination(
+              disbursementClientData.creditType
+            )}`}
             pl={1}
             pr={1}
           >
-            {disbursementClientData.creditType}
+            {disbursementClientData.creditType === "Financiación de Producto"
+              ? "Crédito de compra"
+              : "Crédito de libranza"}
           </Typography>
         </div>
         <div className="row">
